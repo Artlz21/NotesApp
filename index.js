@@ -18,13 +18,33 @@
 //      Here we go over using a cloud based service to deploy our app to the internet for
 //      public use. First we need to add to our PORT at the bottom of the page, we change
 //      (3001 => process.env.PORT || 3001). We are going to use Render, in the past Heroku
-//      was the most used. 
+//      was the most used. To deploy on render we use github and git, we do need to do some
+//      setup and configuration but the process is done in this order after creating the repo
+//      (git init, git add README.md, git commit -m "first commit", git branch -M main, 
+//      git remote add origin git@github.com:Artlz21/NotesApp.git, git push -u origin main).
+//      When this is done go to render create a new web service log in through github and 
+//      use the repo link. For our project make sure the build command and the start command
+//      are set to npm install and npm start. Start it up and wait for it to deploy.
+// - Frontend production build
+//      So far we have been using development mode to run React apps which gives dev benefits
+//      like immediate rendering, clear errors, and more. Now we need a production build, for
+//      vite we create a production build with the command (npm run build) in the apps root.
+//      Now we need to copy the dist file into the backend you can just copy paste but the 
+//      command to do so is (cp -r <file being copied> <destination>). To run the static content
+//      from the file we need a middleware from express (express.static('filename')). Now both
+//      front and back are in the same origin and can be displayed with the same url, change the
+//      baseUrl in the app to /api/notes and make a new production build with the same process.
+// - The whole app to the internet
+//      Now the whole app is ready to be deployed to render. Use (git status) to see the changes
+//      made to the app and start to commit and push it to github then verify the changes on the 
+//      deployed app.
 const express = require('express')
 const app = express()
 const cors = require('cors')
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('dist'))
 
 let notes = [
     {

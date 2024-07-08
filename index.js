@@ -38,6 +38,17 @@
 //      Now the whole app is ready to be deployed to render. Use (git status) to see the changes
 //      made to the app and start to commit and push it to github then verify the changes on the 
 //      deployed app.
+// - Streamlining deploying of the frontend
+//      It is possible to build scripts to execute creating a new frontend production and then 
+//      removing the existing dist file that is not needed copy the file in the app to the backend
+//      and then having it deploy to render through github. To do this go to the package.json file
+//      script in the backend and create a ("build:ui") script that will handle the process of 
+//      creating the production and a ("deploy:full") to handle pushing them to the repo and 
+//      deploying to render, then run each with (npm run <scriptHere>).
+// - Proxy 
+//      Because of the changes we made the command npm run dev no longer works, this is because
+//      we changed the baseUrl, we can fix this with proxy. Go to the vite.config.js file and 
+//      server and proxy lines that are now there and the issue will be resolved.
 const express = require('express')
 const app = express()
 const cors = require('cors')
